@@ -24,7 +24,20 @@ public class HelloController {
                 Runtime.getRuntime().availableProcessors());
     }
 
+    @GetMapping("/temperature")
+    public TemperatureResponse convertTemperature(@RequestParam(defaultValue = "32.0") double f) {
+        double celsius = (f - 32.0) * 5.0 / 9.0;
+        double kelvin = celsius + 273.15;
+
+        double roundedCelsius = Math.round(celsius * 100.0) / 100.0;
+        double roundedKelvin = Math.round(kelvin * 100.0) / 100.0;
+
+        return new TemperatureResponse(f, roundedCelsius, roundedKelvin);
+    }
+
     public record Greeting(String message, String owner, LocalDateTime timestamp) { }
 
     public record Info(String owner, String javaVersion, int cpuCores) { }
+
+    public record TemperatureResponse(double fahrenheit, double celsius, double kelvin) { }
 }
