@@ -21,4 +21,8 @@ public class PrefixedNotifier implements Notifier {
     public String send(String message) {
         return prefix + message;
     }
+    @Override
+    public String channel() {
+        return "PREFIXED";
+    }
 }
