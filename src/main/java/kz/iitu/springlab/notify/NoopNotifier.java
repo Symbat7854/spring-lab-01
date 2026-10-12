@@ -1,10 +1,10 @@
 package kz.iitu.springlab.notify;
 
-import org.springframework.context.annotation.Fallback;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.stereotype.Component;
 
 @Component("noop")
-@Fallback
+@ConditionalOnMissingBean(Notifier.class)
 public class NoopNotifier implements Notifier {
 
     @Override
